@@ -15,11 +15,16 @@ class HollowViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bendingForceLabel: UILabel!
     @IBOutlet weak var twistForceLabel: UILabel!
     
+    @IBOutlet weak var calculationBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         outerDiameterTextField.delegate = self
         innerDiameterTextField.delegate = self
+        
+        calculationBtn.layer.cornerRadius = calculationBtn.frame.height / 2
+        calculationBtn.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -50,7 +55,6 @@ class HollowViewController: UIViewController, UITextFieldDelegate {
         let zp = pi / 32 * ((pow(outerDiameter, 4) - pow(innerDiameter, 4)) / outerDiameter)
         var bendingCalcu = 1 / (1 / (zp * 0.2058) * 2)
         bendingCalcu = floor(bendingCalcu * 10) / 10
-        print(bendingCalcu)
         return bendingCalcu.description
     }
     
@@ -59,7 +63,6 @@ class HollowViewController: UIViewController, UITextFieldDelegate {
         let zp = pi / 16 * ((pow(outerDiameter, 4) - pow(innerDiameter, 4)) / outerDiameter)
         var twistCalcu = 1 / (1 / (zp * 0.2058) * 5.2)
         twistCalcu = floor(twistCalcu * 10) / 10
-        print(twistCalcu)
         return twistCalcu.description
     }
     
